@@ -1,0 +1,45 @@
+{
+  "model": "StandardScaler + DecisionTreeClassifier(max_depth=2)",
+  "features": [
+    "radius_mean",
+    "texture_mean"
+  ],
+  "test_accuracy": 0.8596491228070176,
+  "confusion_matrix": [
+    [
+      70,
+      2
+    ],
+    [
+      14,
+      28
+    ]
+  ],
+  "classification_report": {
+    "Benign": {
+      "precision": 0.8333333333333334,
+      "recall": 0.9722222222222222,
+      "f1-score": 0.8974358974358975,
+      "support": 72.0
+    },
+    "Malignant": {
+      "precision": 0.9333333333333333,
+      "recall": 0.6666666666666666,
+      "f1-score": 0.7777777777777778,
+      "support": 42.0
+    },
+    "accuracy": 0.8596491228070176,
+    "macro avg": {
+      "precision": 0.8833333333333333,
+      "recall": 0.8194444444444444,
+      "f1-score": 0.8376068376068376,
+      "support": 114.0
+    },
+    "weighted avg": {
+      "precision": 0.8701754385964913,
+      "recall": 0.8596491228070176,
+      "f1-score": 0.8533513270355375,
+      "support": 114.0
+    }
+  }
+}
