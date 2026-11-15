@@ -26,9 +26,8 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-          pip install pytest httpx
 
-      - name: Start MLflow Server
+      - name: Start MLflow server
         run: |
           nohup mlflow server \
             --backend-store-uri sqlite:///mlflow.db \
@@ -37,26 +36,27 @@ jobs:
             --artifacts-destination ./mlartifacts \
             > mlflow.log 2>&1 &
 
+      - name: Wait for MLflow
+        run: |
           for i in {1..30}; do
             if curl -fsS http://127.0.0.1:6001/health; then
-              echo "MLflow server is ready!"
+              echo "MLflow server is ready"
               exit 0
             fi
             sleep 2
           done
-
           echo "MLflow server failed to start"
           cat mlflow.log
           exit 1
 
-      - name: Train model
+      - name: Train and register model
         run: python train_model.py
 
-      - name: Validate and promote model
+      - name: Promote model
         run: python promote_model.py
 
       - name: Run API tests
-        run: python -m pytest -q
+        run: python -m pytest -v
         env:
           PYTHONPATH: ${{ github.workspace }}
 
